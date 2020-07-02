@@ -16,12 +16,12 @@ let employeeArray = [];
 
 function generateTeam() {
   inquirer
-    .prompt({
+    .prompt([{
       type: "list",
       message: "Please select to add team member or No more team member",
       name: "teamSelection",
       choices: ["Manager", "Engineer", "Intern", "Done"],
-    })
+    }])
     .then((response) => {
       console.log(response);
       // making prompts for each role
@@ -105,7 +105,7 @@ function generateTeam() {
             );
             console.log(engineer);
             // PUSH the response to the employee array
-            employeeArray.push(Engineer);
+            employeeArray.push(engineer);
             // call the function again to ask initial question to user
             generateTeam();
           })
@@ -158,25 +158,25 @@ function generateTeam() {
               console.log(err);
             }
           });
-      } else if (response.teamSelection === "Done") {
+      } 
+      else if (response.teamSelection === "Done") {
         console.log("Finished generating team!");
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
-        // let html = render(employeeArray);
+   fs.writeFile("./output/team.html", render(employeeArray), function(err){
+     if(err){
+       throw err;
+     }
+     console.log("successfully wrote into output folder")
+   })
 
         // After you have your html, you're now ready to create an HTML file using the HTML
         // returned from the `render` function. Now write it to a file named `team.html` in the
         // `output` folder. You can use the variable `outputPath` above target this location.
         // Hint: you may need to check if the `output` folder exists and create it if it
         // does not.
-        // fs.writeFile(outputPath,html, ((err) =>{
-        //   if (err) {
-        //     console.log(err);
-        //   } else {
-        //     console.log("Successfully wrote into output folder");
-        //   }
-        // }));
+
       }
     });
 }
