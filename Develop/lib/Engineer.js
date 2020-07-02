@@ -20,7 +20,7 @@ class Engineer extends Employee {
     }
 
     getRole() {
-        return "Engineer"
+        return Engineer.name;
     }
 }
 // const engineer = new Engineer("Foo",1,"test@test.com","testValue")
