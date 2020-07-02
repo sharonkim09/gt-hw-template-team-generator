@@ -54,7 +54,9 @@ function generateTeam(){inquirer
     // Store the responses from user input using Manager class
       let manager = new Manager(response.name,response.id,response.email,response.officeNumber)
       console.log(manager)
+      // after pushing response to array, call function to ask user initial question
       employeeArray.push(manager)
+      generateTeam();
     })
     .catch((err)=>{
       if(err){
@@ -62,6 +64,88 @@ function generateTeam(){inquirer
       }
     })
   }
+// user selects Engineer
+else if(response.teamSelection === "Engineer"){
+    inquirer.prompt([{
+      type:"input",
+      message: "What is your Engineer's name?",
+      name:"name"
+    },
+    {
+      type:"input",
+      message: "What is your Engineer's id number?",
+      name:"id"
+    },
+    {
+      type:"input",
+      message: "What is your Engineer's email address?",
+      name:"email"
+    },
+    {
+      type:"input",
+      message: "What is your Engineer's github address?",
+      name:"githubAddress"
+    },
+  ]).then((response)=>{
+      console.log(response)
+    // Store the responses from user input using Engineer class
+      let engineer = new Engineer(response.name,response.id,response.email,response.githubAddress)
+      console.log(engineer)
+      // PUSH the response to the employee array
+      employeeArray.push(Engineer)
+      // call the function again to ask initial question to user
+      generateTeam()
+     
+    })
+    .catch((err)=>{
+      if(err){
+        console.log(err)
+      }
+    })
+
+}
+else if(response.teamSelection === "Intern"){
+  inquirer.prompt([{
+    type:"input",
+    message: "What is your Intern's name?",
+    name:"name"
+  },
+  {
+    type:"input",
+    message: "What is your Intern's id number?",
+    name:"id"
+  },
+  {
+    type:"input",
+    message: "What is your Intern's email address?",
+    name:"email"
+  },
+  {
+    type:"input",
+    message: "Where does your Intern attend school?",
+    name:"school"
+  },
+]).then((response)=>{
+    console.log(response)
+  // Store the responses from user input using Engineer class
+    let intern = new Intern(response.name,response.id,response.email,response.school)
+    console.log(intern)
+    // PUSH the response to the employee array
+    employeeArray.push(intern)
+    // call the function again to ask initial question to user
+    generateTeam()
+  })
+  .catch((err)=>{
+    if(err){
+      console.log(err)
+    }
+  })
+
+}
+else if(response.teamSelection === "Done"){
+  console.log("Finished generating team!")
+  
+}
 })
 }
 generateTeam();
