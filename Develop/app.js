@@ -10,9 +10,61 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+let employeeArray = [];
+
+function generateTeam(){inquirer
+.prompt({
+  type:"list",
+  message:"Please select to add team member or No more team member",
+  name:"teamSelection",
+  choices:[
+    "Manager",
+    "Engineer",
+    "Intern",
+    "Done"
+  ]
+}).then(response =>{
+  console.log(response);
+  // making prompts for each role 
+  if(response.teamSelection === "Manager"){
+    inquirer.prompt([{
+      type:"input",
+      message: "What is your manager's name?",
+      name:"name"
+    },
+    {
+      type:"input",
+      message: "What is your manager's id number?",
+      name:"id"
+    },
+    {
+      type:"input",
+      message: "What is your manager's email address?",
+      name:"email"
+    },
+    {
+      type:"input",
+      message: "What is your manager's office number?",
+      name:"officeNumber"
+    },
+  ]).then((response)=>{
+      console.log(response)
+    // Store the responses from user input using Manager class
+      let manager = new Manager(response.name,response.id,response.email,response.officeNumber)
+      console.log(manager)
+      employeeArray.push(manager)
+    })
+    .catch((err)=>{
+      if(err){
+        console.log(err)
+      }
+    })
+  }
+})
+}
+generateTeam();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -28,8 +80,3 @@ const render = require("./lib/htmlRenderer");
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```

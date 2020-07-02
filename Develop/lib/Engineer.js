@@ -23,8 +23,8 @@ class Engineer extends Employee {
         return "Engineer"
     }
 }
-const engineer = new Engineer("Foo",1,"test@test.com","testValue")
-console.log(engineer)
+// const engineer = new Engineer("Foo",1,"test@test.com","testValue")
+// console.log(engineer)
 
 // engineer.getGithub()
 module.exports=Engineer

@@ -19,6 +19,6 @@ class Manager extends Employee{
         return this.officeNumber;
     }
 }
-    const manager= new Manager("Heidi",2,"test2@gmail.com", 100)
-    console.log(manager)
+    // const manager= new Manager("Heidi",2,"test2@gmail.com", 100)
+    // console.log(manager)
     module.exports = Manager

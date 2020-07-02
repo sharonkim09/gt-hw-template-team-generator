@@ -33,7 +33,7 @@ class Employee{
     }
 }
 
-const name = new Employee("Alice",100, "test@test.com")
-console.log(name);
+// const name = new Employee("Alice",100, "test@test.com")
+// console.log(name);
 
 module.exports = Employee
