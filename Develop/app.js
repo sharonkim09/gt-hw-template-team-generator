@@ -5,7 +5,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-// 
+//
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -23,11 +23,16 @@ function generateTeam() {
         type: "list",
         message: "Which type of team member would you like to add?",
         name: "teamSelection",
-        choices: ["Manager", "Engineer", "Intern", "I don't want to add any more team members"],
+        choices: [
+          "Manager",
+          "Engineer",
+          "Intern",
+          "I don't want to add any more team members",
+        ],
       },
     ])
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       // Manager Questions displayed when user selects Manager
       if (response.teamSelection === "Manager") {
         inquirer
@@ -41,20 +46,48 @@ function generateTeam() {
               type: "input",
               message: "What is your manager's id number?",
               name: "id",
+              // to validate if user entered a number greater than 0
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
               message: "What is your manager's email address?",
               name: "email",
+              // to validate if user entered a valid email address
+              validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
               message: "What is your manager's office number?",
               name: "officeNumber",
+               // to validate if user entered a number greater than 0
+               validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Manager class
             let manager = new Manager(
               response.name,
@@ -62,7 +95,7 @@ function generateTeam() {
               response.email,
               response.officeNumber
             );
-            console.log(manager);
+            // console.log(manager);
             // after pushing response to array, call function to ask user initial question
             employeeArray.push(manager);
             generateTeam();
@@ -86,11 +119,30 @@ function generateTeam() {
               type: "input",
               message: "What is your Engineer's id number?",
               name: "id",
+               // to validate if user entered a number greater than 0
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
               message: "What is your Engineer's email address?",
               name: "email",
+               // to validate if user entered a valid email address
+               validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
@@ -99,7 +151,7 @@ function generateTeam() {
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Engineer class
             let engineer = new Engineer(
               response.name,
@@ -107,7 +159,7 @@ function generateTeam() {
               response.email,
               response.github
             );
-            console.log(engineer);
+            // console.log(engineer);
             // PUSH the response to the employee array
             employeeArray.push(engineer);
             // call the function again to ask initial question to user
@@ -131,11 +183,30 @@ function generateTeam() {
               type: "input",
               message: "What is your Intern's id number?",
               name: "id",
+               // to validate if user entered a number greater than 0
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
               message: "What is your Intern's email address?",
               name: "email",
+               // to validate if user entered a valid email address
+               validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
@@ -144,7 +215,7 @@ function generateTeam() {
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Intern class
             let intern = new Intern(
               response.name,
@@ -152,7 +223,7 @@ function generateTeam() {
               response.email,
               response.school
             );
-            console.log(intern);
+            // console.log(intern);
             // PUSH the response to the employee array
             employeeArray.push(intern);
             // call the function again to ask initial question to user
@@ -163,10 +234,14 @@ function generateTeam() {
               console.log(err);
             }
           });
-      } else if (response.teamSelection === "I don't want to add any more team members") {
+      } else if (
+        response.teamSelection === "I don't want to add any more team members"
+      ) {
         console.log("Finished generating team!");
         // Write file that renders user input to team.html
-        fs.writeFile("./output/team.html", render(employeeArray), function (err) {
+        fs.writeFile("./output/team.html", render(employeeArray), function (
+          err
+        ) {
           if (err) {
             throw err;
           }
