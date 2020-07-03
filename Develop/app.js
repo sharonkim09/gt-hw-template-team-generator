@@ -46,6 +46,7 @@ function generateTeam() {
               type: "input",
               message: "What is your manager's id number?",
               name: "id",
+              // to validate if user entered a number greater than 0
               validate: (response) => {
                 const number = response.match(/^[1-9]\d*$/);
                 if (number) {
@@ -59,11 +60,30 @@ function generateTeam() {
               type: "input",
               message: "What is your manager's email address?",
               name: "email",
+              // to validate if user entered a valid email address
+              validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
               message: "What is your manager's office number?",
               name: "officeNumber",
+               // to validate if user entered a number greater than 0
+               validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
           ])
           .then((response) => {
@@ -99,6 +119,7 @@ function generateTeam() {
               type: "input",
               message: "What is your Engineer's id number?",
               name: "id",
+               // to validate if user entered a number greater than 0
               validate: (response) => {
                 const number = response.match(/^[1-9]\d*$/);
                 if (number) {
@@ -112,6 +133,16 @@ function generateTeam() {
               type: "input",
               message: "What is your Engineer's email address?",
               name: "email",
+               // to validate if user entered a valid email address
+               validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
@@ -152,6 +183,7 @@ function generateTeam() {
               type: "input",
               message: "What is your Intern's id number?",
               name: "id",
+               // to validate if user entered a number greater than 0
               validate: (response) => {
                 const number = response.match(/^[1-9]\d*$/);
                 if (number) {
@@ -165,6 +197,16 @@ function generateTeam() {
               type: "input",
               message: "What is your Intern's email address?",
               name: "email",
+               // to validate if user entered a valid email address
+               validate:(response) => {
+                const emailAddress = response.match(/\S+@\S+\.\S+/);
+                if(emailAddress){
+                  return true;
+                }
+                else{
+                  return "Enter a valid email address"
+                }
+              }
             },
             {
               type: "input",
