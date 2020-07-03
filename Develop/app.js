@@ -27,7 +27,7 @@ function generateTeam() {
       },
     ])
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       // Manager Questions displayed when user selects Manager
       if (response.teamSelection === "Manager") {
         inquirer
@@ -54,7 +54,7 @@ function generateTeam() {
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Manager class
             let manager = new Manager(
               response.name,
@@ -62,7 +62,7 @@ function generateTeam() {
               response.email,
               response.officeNumber
             );
-            console.log(manager);
+            // console.log(manager);
             // after pushing response to array, call function to ask user initial question
             employeeArray.push(manager);
             generateTeam();
@@ -99,7 +99,7 @@ function generateTeam() {
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Engineer class
             let engineer = new Engineer(
               response.name,
@@ -107,7 +107,7 @@ function generateTeam() {
               response.email,
               response.github
             );
-            console.log(engineer);
+            // console.log(engineer);
             // PUSH the response to the employee array
             employeeArray.push(engineer);
             // call the function again to ask initial question to user
@@ -144,7 +144,7 @@ function generateTeam() {
             },
           ])
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             // Store the responses from user input using Intern class
             let intern = new Intern(
               response.name,
@@ -152,7 +152,7 @@ function generateTeam() {
               response.email,
               response.school
             );
-            console.log(intern);
+            // console.log(intern);
             // PUSH the response to the employee array
             employeeArray.push(intern);
             // call the function again to ask initial question to user
