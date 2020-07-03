@@ -21,9 +21,9 @@ function generateTeam() {
     .prompt([
       {
         type: "list",
-        message: "Please select to add team member or No more team member",
+        message: "Which type of team member would you like to add?",
         name: "teamSelection",
-        choices: ["Manager", "Engineer", "Intern", "Done"],
+        choices: ["Manager", "Engineer", "Intern", "I don't want to add any more team members"],
       },
     ])
     .then((response) => {
@@ -94,7 +94,7 @@ function generateTeam() {
             },
             {
               type: "input",
-              message: "What is your Engineer's github address?",
+              message: "What is your Engineer's github username?",
               name: "github",
             },
           ])
@@ -163,7 +163,7 @@ function generateTeam() {
               console.log(err);
             }
           });
-      } else if (response.teamSelection === "Done") {
+      } else if (response.teamSelection === "I don't want to add any more team members") {
         console.log("Finished generating team!");
         // Write file that renders user input to team.html
         fs.writeFile("./output/team.html", render(employeeArray), function (err) {
