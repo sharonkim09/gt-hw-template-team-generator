@@ -16,10 +16,9 @@ This application is to generate a team profile using Node CLI, which takes in in
 2. Run node app.js in terminal 
 
 ## Usage
-[Deployed Application](https://sharonkim09.github.io/gt-hw-template-team-generator/)
+[Link to Demo of Application](https://drive.google.com/file/d/1093QOIA6IYq0SiHpKLsxNGFxTnvqcqeO/view)
 
-
-The following demonstrates the application functionality:
+![Demo Gif](./Assets/demo.gif)
 
 
 
