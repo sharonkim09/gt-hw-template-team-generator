@@ -5,7 +5,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-// 
+//
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -23,7 +23,12 @@ function generateTeam() {
         type: "list",
         message: "Which type of team member would you like to add?",
         name: "teamSelection",
-        choices: ["Manager", "Engineer", "Intern", "I don't want to add any more team members"],
+        choices: [
+          "Manager",
+          "Engineer",
+          "Intern",
+          "I don't want to add any more team members",
+        ],
       },
     ])
     .then((response) => {
@@ -41,6 +46,14 @@ function generateTeam() {
               type: "input",
               message: "What is your manager's id number?",
               name: "id",
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
@@ -86,6 +99,14 @@ function generateTeam() {
               type: "input",
               message: "What is your Engineer's id number?",
               name: "id",
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
@@ -131,6 +152,14 @@ function generateTeam() {
               type: "input",
               message: "What is your Intern's id number?",
               name: "id",
+              validate: (response) => {
+                const number = response.match(/^[1-9]\d*$/);
+                if (number) {
+                  return true;
+                } else {
+                  return "Enter a valid number greater than 0";
+                }
+              },
             },
             {
               type: "input",
@@ -163,10 +192,14 @@ function generateTeam() {
               console.log(err);
             }
           });
-      } else if (response.teamSelection === "I don't want to add any more team members") {
+      } else if (
+        response.teamSelection === "I don't want to add any more team members"
+      ) {
         console.log("Finished generating team!");
         // Write file that renders user input to team.html
-        fs.writeFile("./output/team.html", render(employeeArray), function (err) {
+        fs.writeFile("./output/team.html", render(employeeArray), function (
+          err
+        ) {
           if (err) {
             throw err;
           }
